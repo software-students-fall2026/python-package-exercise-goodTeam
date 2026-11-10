@@ -2,6 +2,7 @@ import argparse
 import sys
 
 from pyDeciders import flip_coin, magic_8_ball, pick_one, roll_dice, spin_wheel
+from pyDeciders.animation import animate, should_animate
 
 
 def build_parser():
@@ -11,6 +12,11 @@ def build_parser():
     )
     common = argparse.ArgumentParser(add_help=False)
     common.add_argument("--seed", type=int, default=None)
+    common.add_argument(
+        "--no-animation",
+        action="store_true",
+        help="print the answer straight away, without the animation",
+    )
     commands = parser.add_subparsers(dest="command", required=True)
 
     dice = commands.add_parser("dice", parents=[common], help="roll dice")
@@ -56,5 +62,11 @@ def main(argv=None):
     except ValueError as error:
         print(f"decisions: {error}", file=sys.stderr)
         return 1
+
+    if should_animate(args.no_animation, sys.stdout):
+        try:
+            animate(args.command, args)
+        except KeyboardInterrupt:
+            pass 
     print_result(result)
     return 0

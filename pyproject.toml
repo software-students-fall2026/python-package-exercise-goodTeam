@@ -31,7 +31,7 @@ classifiers = [
 dependencies = ["rich"]
 
 [project.urls]
-Homepage = "https://github.com/software-students-fall2026/python-pac
+Homepage = "https://github.com/software-students-fall2026/python-package-exercise-goodTeam"
 Repository = "https://github.com/software-students-fall2026/python-package-exercise-goodTeam"
 
 [project.scripts]
